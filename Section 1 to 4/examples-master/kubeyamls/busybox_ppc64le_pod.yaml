@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-ppc64le
+  namespace: default
+spec:
+  containers:
+  - image: ppc64le/busybox
+    command:
+      - sleep
+      - "10000"
+    imagePullPolicy: IfNotPresent
+    name: busybox
+  restartPolicy: Always

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  # Set this to true to enable PID namespace sharing
+  shareProcessNamespace: true
+  containers:
+  - name: nginx
+    image: nginx
+  - name: shell
+    image: bpradipt/perf
+    securityContext:
+       privileged: true
+    stdin: true
+    tty: true

@@ -1,0 +1,34 @@
+##
+## Generated using https://github.com/bpradipt/generator-kubegen.git
+##
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        name: memhog-app
+    name: memhog-app
+    namespace: default
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: memhog-app
+    template:
+        metadata:
+            labels:
+                app: memhog-app
+        spec:
+            containers:
+                -
+                    name: memhog-app
+                    image: 'bpradipt/stress'
+                    imagePullPolicy: IfNotPresent
+                    command:
+                        - stress
+                    args:
+                        - '--vm'
+                        - '1'
+                        - '--vm-bytes'
+                        - 100G
+                        - '--vm-hang'
+                        - '1'

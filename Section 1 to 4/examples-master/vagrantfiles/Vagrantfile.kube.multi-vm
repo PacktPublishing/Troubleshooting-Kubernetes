@@ -1,0 +1,45 @@
+
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+   config.vm.synced_folder "/vagrant_data", "/vagrant_data"
+
+   config.vm.define "master" do |master|
+     master.vm.box = "yk0/ubuntu-xenial"
+     master.vm.box_check_update = false
+     master.vm.hostname = "kubemaster"
+     master.vm.provider :libvirt do |domain|
+         domain.memory = 1024
+         domain.cpus = 1
+     end
+   end
+
+   config.vm.define "slave" do |slave|
+     slave.vm.box = "yk0/ubuntu-xenial"
+     slave.vm.box_check_update = false
+     slave.vm.hostname = "kubeslave1"
+     slave.vm.provider :libvirt do |domain|
+         domain.memory = 2048
+         domain.cpus = 2
+     end
+   end
+
+
+  config.vm.provider :libvirt do |libvirt|
+    libvirt.driver = "kvm"
+    # The name of the server, where libvirtd is running.
+     libvirt.host = "localhost"
+    # If use ssh tunnel to connect to Libvirt.
+     libvirt.connect_via_ssh = true
+
+     libvirt.username = "root"
+    # Libvirt storage pool name, where box image and instance snapshots will
+    # be stored.
+     libvirt.storage_pool_name = "default"
+
+
+    # Set a prefix for the machines that's different than the project dir name.
+    #libvirt.default_prefix = ''
+  end
+end

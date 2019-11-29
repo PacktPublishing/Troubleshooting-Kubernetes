@@ -1,0 +1,41 @@
+##
+## Generated using https://github.com/bpradipt/generator-kubegen.git
+##
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        name: node-stress-app
+    name: node-stress-app
+    namespace: default
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: node-stress-app
+    template:
+        metadata:
+            labels:
+                app: node-stress-app
+        spec:
+            containers:
+                -
+                    name: node-stress-app
+                    image: 'bpradipt/stress'
+                    imagePullPolicy: IfNotPresent
+                    resources:
+                        requests:
+                            memory: 50M
+                        limits:
+                            memory: 200M
+                    command:
+                        - stress
+                    args:
+                        - '--vm'
+                        - '1'
+                        - '--vm-bytes'
+                        - 250M
+                        - '--vm-hang'
+                        - '1'
+            nodeSelector:
+                kubernetes.io/hostname: <name>

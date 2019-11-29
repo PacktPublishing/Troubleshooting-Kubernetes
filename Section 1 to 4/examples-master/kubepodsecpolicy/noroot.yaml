@@ -1,0 +1,23 @@
+{
+  "kind": "PodSecurityPolicy",
+  "apiVersion":"extensions/v1beta1",
+  "metadata": {
+    "name": "noroot"
+  },
+  "spec": {
+      "privileged": false,
+      "seLinux": {
+          "rule": "RunAsAny"
+      },
+      "supplementalGroups": {
+          "rule": "RunAsAny"
+      },
+      "runAsUser": {
+          "rule": "MustRunAsNonRoot"
+      },
+      "fsGroup": {
+          "rule": "RunAsAny"
+      },
+      "volumes": ["*"]
+  }
+}

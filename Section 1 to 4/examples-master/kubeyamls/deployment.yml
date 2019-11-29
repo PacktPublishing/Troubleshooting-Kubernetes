@@ -1,0 +1,25 @@
+##
+## Generated using https://github.com/bpradipt/generator-kubegen.git
+##
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        name: nginx-sample
+    name: nginx-sample
+    namespace: default
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: nginx-sample
+    template:
+        metadata:
+            labels:
+                app: nginx-sample
+        spec:
+            containers:
+                -
+                    name: nginx-sample
+                    image: nginx
+                    imagePullPolicy: IfNotPresent

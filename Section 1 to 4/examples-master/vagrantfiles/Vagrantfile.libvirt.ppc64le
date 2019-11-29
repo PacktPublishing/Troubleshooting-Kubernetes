@@ -1,0 +1,42 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "xenial-ppc64le"
+#  config.vm.synced_folder "/vagrant_data", "/vagrant_data", type: 'nfs'
+  config.vm.hostname = "vm1-ppc"
+  config.vm.provider :libvirt do |libvirt|
+    #This is important. We need to use Qemu driver type for emulation
+    libvirt.driver = "qemu"
+
+    # The name of the server, where libvirtd is running.
+     libvirt.host = "localhost"
+
+    # If use ssh tunnel to connect to Libvirt.
+     libvirt.connect_via_ssh = true
+
+    # The username and password to access Libvirt. Password is not used when
+    # connecting via ssh.
+     libvirt.username = "root"
+     libvirt.password = "root123"
+
+    # Libvirt storage pool name, where box image and instance snapshots will
+    # be stored.
+     libvirt.storage_pool_name = "default"
+
+    # Set a prefix for the machines that's different than the project dir name.
+    #libvirt.default_prefix = ''
+  end
+  config.vm.define :vm_ppc64le do |vm_ppc64le|
+    vm_ppc64le.vm.provider :libvirt do |domain|
+      domain.memory = 2048
+      domain.cpus = 1
+      domain.video_type = "vga"
+      domain.machine_arch = "ppc64le"
+      domain.cpu_mode = "custom"
+      domain.cpu_model = "POWER8"
+    end
+  end
+  #Install docker for Ubuntu ppc64 from custom location
+  config.vm.provision "shell", path: "install_docker.sh"
+end

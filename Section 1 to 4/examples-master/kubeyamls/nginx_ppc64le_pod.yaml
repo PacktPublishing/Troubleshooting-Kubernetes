@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: nginx-ppc64le
+  namespace: default
+  name: nginx-ppc64le
+spec:
+  containers:
+    - image: redos/nginx-ppc64le:latest
+      imagePullPolicy: IfNotPresent
+      name: nginx-ppc64le
+      ports:
+      - containerPort: 80
+        protocol: TCP
+  nodeSelector:
+    beta.kubernetes.io/arch: ppc64le

@@ -1,0 +1,23 @@
+{
+  "kind": "PodSecurityPolicy",
+  "apiVersion":"extensions/v1beta1",
+  "metadata": {
+    "name": "dropcapabilities"
+  },
+  "spec": {
+      "requiredDropCapabilities": ["SETFCAP", "DAC_OVERRIDE" ],
+      "seLinux": {
+          "rule": "RunAsAny"
+      },
+      "supplementalGroups": {
+          "rule": "RunAsAny"
+      },
+      "runAsUser": {
+          "rule": "RunAsAny"
+      },
+      "fsGroup": {
+          "rule": "RunAsAny"
+      },
+      "volumes": ["*"]
+  }
+}

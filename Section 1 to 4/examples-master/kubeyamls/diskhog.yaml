@@ -1,0 +1,30 @@
+##
+## Generated using https://github.com/bpradipt/generator-kubegen.git
+##
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        name: diskhog-app
+    name: diskhog-app
+    namespace: default
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: diskhog-app
+    template:
+        metadata:
+            labels:
+                app: diskhog-app
+        spec:
+            containers:
+                -
+                    name: diskhog-app
+                    image: 'bpradipt/stress'
+                    imagePullPolicy: IfNotPresent
+                    command:
+                        - stress
+                    args:
+                        - '--hdd'
+                        - '4'

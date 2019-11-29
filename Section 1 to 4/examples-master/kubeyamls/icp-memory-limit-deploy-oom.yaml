@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        name: oom-app
+    name: oom-app
+    namespace: default
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: oom-app
+    template:
+        metadata:
+            labels:
+                app: oom-app
+        spec:
+            containers:
+                -
+                    name: oom-app
+                    image: 'mycluster.icp:8500/default/stress-ppc64le'
+                    imagePullPolicy: IfNotPresent
+                    resources:
+                        requests:
+                            memory: 50M
+                        limits:
+                            memory: 200M
+                    command:
+                        - stress
+                    args:
+                        - '--vm'
+                        - '1'
+                        - '--vm-bytes'
+                        - 250M
+                        - '--vm-hang'
+                        - '1'
