@@ -1,0 +1,16 @@
+     time_namelookup:  %{time_namelookup}s\n
+        time_connect:  %{time_connect}s\n
+     time_appconnect:  %{time_appconnect}s\n
+    time_pretransfer:  %{time_pretransfer}s\n
+       time_redirect:  %{time_redirect}s\n
+  time_starttransfer:  %{time_starttransfer}s\n
+                     ----------\n
+          time_total:  %{time_total}s\n
+---------------------------------------------\n
+size_download: %{size_download}\n
+size_header: %{size_header}\n
+size_request: %{size_request}\n
+size_upload: %{size_upload}\n
+speed_download: %{speed_download}\n
+speed_upload: %{speed_upload}\n
+

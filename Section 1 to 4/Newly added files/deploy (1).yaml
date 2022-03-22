@@ -1,0 +1,34 @@
+## https://github.com/Praqma/Network-MultiTool
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    labels:
+        name: network-multitool-deploy
+    name: network-multitool-deploy
+    namespace: kube-system
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: network-multitool-deploy
+    template:
+        metadata:
+            labels:
+                app: network-multitool-deploy
+        spec:
+            containers:
+                -
+                    name: network-multitool-deploy
+                    image: 'praqma/network-multitool'
+                    imagePullPolicy: IfNotPresent
+                    resources:
+                        requests:
+                            cpu: 50m
+                            memory: 100M
+                        limits:
+                            cpu: 50m
+                            memory: 100M
+                    securityContext:
+                        runAsUser: 0
+                        capabilities:
+                            add: ["NET_ADMIN"]
